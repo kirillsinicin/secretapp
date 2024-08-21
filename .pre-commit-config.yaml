@@ -1,13 +1,24 @@
 repos:
--   repo: local
+  - repo: local
     hooks:
-    -   id: black
+      - id: black
         name: black
         entry: black
         types:
-            - python
+          - python
         language: python
-    -   id: isort
+      - id: isort
         name: isort
         entry: isort
         language: python
+      - id: pylint
+        name: pylint
+        entry: pylint
+        language: system
+        types: [ python ]
+        require_serial: true
+        args:
+          [
+            "-rn", # Only display messages
+            "-sn", # Don't display the score
+          ]

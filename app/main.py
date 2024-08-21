@@ -1,5 +1,6 @@
 from fastapi import FastAPI
-from routers.secret import secret_router
+
+from app.routers.secret import secret_router
 
 app = FastAPI()
 

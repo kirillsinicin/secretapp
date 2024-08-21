@@ -9,6 +9,9 @@ class CreateSecretReq(BaseModel):
 class CreateSecretRes(BaseModel):
     secret_key: str
 
+    class Config:
+        from_attributes = True
+
 
 class GetSecretReq(BaseModel):
     pass_phrase: str
@@ -16,6 +19,9 @@ class GetSecretReq(BaseModel):
 
 class GetSecretRes(BaseModel):
     secret: str
+
+    class Config:
+        from_attributes = True
 
 
 class Secret(CreateSecretReq, CreateSecretRes):
