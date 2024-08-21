@@ -34,11 +34,6 @@ def create_one_secret(
     secret: CreateSecretReq, session: ClientSession
 ) -> CreateSecretRes:
     secret_hash = hash_secret(secret)
-    # secret_db = Secret(
-    #     secret_key=str(uuid.uuid4()),
-    #     secret=secret_hash.secret,
-    #     pass_phrase=secret_hash.pass_phrase,
-    # )
     secret_db = {
         "secret_key": str(uuid.uuid4()),
         "secret": secret_hash.secret,

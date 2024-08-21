@@ -1,6 +1,8 @@
 from pymongo import MongoClient
 
-mongo_client = MongoClient("mongodb://kiruha:example@localhost:27017/")
+from app.config import settings
+
+mongo_client = MongoClient(str(settings.database_url))
 
 
 def get_session():
