@@ -32,4 +32,4 @@ profile = "black"
 
 [tool.pylint.main]
 
-disable = ["missing-module-docstring","missing-class-docstring","too-few-public-methods","missing-function-docstring"]
+disable = ["missing-module-docstring","missing-class-docstring","too-few-public-methods","missing-function-docstring","unused-argument","redefined-outer-name","import-outside-toplevel"]
