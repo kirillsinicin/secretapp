@@ -31,7 +31,8 @@ def hash_secret(secret: CreateSecretReq) -> CreateSecretReq:
 
 
 def create_one_secret(
-    secret: CreateSecretReq, session: ClientSession
+    secret: CreateSecretReq,
+    session: ClientSession,
 ) -> CreateSecretRes:
     secret_hash = hash_secret(secret)
     secret_db = {
@@ -43,6 +44,10 @@ def create_one_secret(
     with session.start_transaction():
         secrets_collection.insert_one(secret_db)
         return CreateSecretRes(secret_key=secret_db["secret_key"])
+
+
+class SecretNotFoundException(Exception):
+    pass
 
 
 def get_one_secret(
@@ -59,4 +64,4 @@ def get_one_secret(
                         secret_db["secret"], secret_req.pass_phrase
                     )
                 )
-        return None
+        raise SecretNotFoundException()
