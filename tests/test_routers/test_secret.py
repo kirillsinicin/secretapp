@@ -24,12 +24,12 @@ def test_get_secret(client, create_secret):
 
 
 def test_get_secret_bad(client, create_secret):
-    secret_in_db, secret_req_body = create_secret
+    secret_in_db = create_secret[0]
     response = client.request(
         method="GET",
         url=f"/secrets/{secret_in_db["secret_key"]}",
         json={
-            "pass_phrase": "bad_pass_phrase" + secret_req_body,
+            "pass_phrase": "bad_pass_phrase",
         },
     )
     assert response.status_code == 404
