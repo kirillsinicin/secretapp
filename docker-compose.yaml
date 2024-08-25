@@ -1,4 +1,16 @@
 services:
+  api:
+    build:
+      context: .
+    container_name: secret-app
+    environment:
+      DATABASE_URL: "mongodb://kiruha:example@mongo_db:27017/"
+    ports:
+      - '8080:80'
+    restart: "no"
+    depends_on:
+      mongo_db:
+        condition: service_started
 
   mongo_db:
     image: mongo
