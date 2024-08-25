@@ -1,4 +1,4 @@
-def test_create_secret(client, monkeypatch):
+def test_create_secret(client):
     response = client.post(
         "/generate/",
         json={
@@ -22,9 +22,18 @@ def test_get_secret(client, create_secret):
     assert response.status_code == 200
     assert secret_req_body["secret"] == response.json()["secret"]
 
+    retry_response = client.request(
+        method="GET",
+        url=f"/secrets/{secret_in_db["secret_key"]}",
+        json={
+            "pass_phrase": secret_req_body["pass_phrase"],
+        },
+    )
+    assert retry_response.status_code == 404
+
 
 def test_get_secret_bad(client, create_secret):
-    secret_in_db = create_secret[0]
+    secret_in_db, _ = create_secret
     response = client.request(
         method="GET",
         url=f"/secrets/{secret_in_db["secret_key"]}",
