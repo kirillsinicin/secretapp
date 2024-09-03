@@ -3,7 +3,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  check-pull-request:
 
     runs-on: ubuntu-latest
     strategy:
@@ -19,11 +19,6 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
-
-    - name: Install dependencies
-      run: |
-        pwd
-        ls -l
         
     - name: Install dependencies
       run: |
@@ -35,7 +30,7 @@ jobs:
       with:
         compose-file: ./docker-compose.yaml
     
-    - name: Lint with flake8
+    - name: Lint with pylint
       run: |
         python -m poetry run pylint -rn ./app
     
