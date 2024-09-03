@@ -42,3 +42,7 @@ def test_get_secret_bad(client, create_secret):
         },
     )
     assert response.status_code == 404
+
+
+def test_bad_test():
+    assert 1 == 2
